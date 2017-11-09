@@ -9,10 +9,32 @@
     android:padding="20dp"
     tools:showIn="@layout/activity_main">
 
-    <SeekBar
-        android:id="@+id/brightness_bar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <SeekBar
+            android:id="@+id/brightness_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <SeekBar
+            android:id="@+id/system_volume_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <SeekBar
+            android:id="@+id/media_volume_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
