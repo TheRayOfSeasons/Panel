@@ -62,6 +62,52 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        final SeekBar systemVolumeBar = (SeekBar) findViewById(R.id.system_volume_bar);
+        systemVolumeBar.setMax(100);
+        systemVolumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+            {
+                Log.d("System Volume", String.valueOf("System Volume: " + i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+        });
+
+        final SeekBar mediaVolumeBar = (SeekBar) findViewById(R.id.media_volume_bar);
+        mediaVolumeBar.setMax(100);
+        mediaVolumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+            {
+                Log.d("Media Volume", String.valueOf("Media Volume: " + i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+        });
+
         Log.d ("Brightness", String.valueOf(brightness));
     }
 }
