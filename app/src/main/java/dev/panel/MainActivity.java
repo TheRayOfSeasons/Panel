@@ -13,6 +13,40 @@ import android.widget.SeekBar;
 public class MainActivity extends AppCompatActivity
 {
 
+  /*
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    CHANGES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    */
+
     private int brightness;
     private ContentResolver contentResolver;
     private Window window;
