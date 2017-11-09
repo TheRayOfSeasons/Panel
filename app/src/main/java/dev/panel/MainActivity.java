@@ -2,10 +2,12 @@ package dev.panel;
 
 import android.content.ContentResolver;
 import android.provider.Settings;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity
@@ -33,14 +35,18 @@ public class MainActivity extends AppCompatActivity
         }
 
         final SeekBar brightnessBar = (SeekBar) findViewById(R.id.brightness_bar);
-        brightnessBar.setMax(255);
-        brightnessBar.setProgress(brightness);
+        brightnessBar.setMax(100);
+//        brightnessBar.setProgress(brightness);
         brightnessBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-
+                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+                layoutParams.screenBrightness = i;
+                getWindow().setAttributes(layoutParams);
+                Log.wtf("Tag", "WTF");
+//                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, i);
             }
 
             @Override
