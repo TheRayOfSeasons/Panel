@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //Update when brightness is changed by other apps
         SeekBar brightnessBar =  (SeekBar) findViewById(R.id.brightness_bar);
-        brightnessBar.setMax(255);
+        brightnessBar.setMax(100);
         brightnessBar.setProgress(getScreenBrightness());
         brightnessBar.setOnSeekBarChangeListener(this);
 
