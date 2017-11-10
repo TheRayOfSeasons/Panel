@@ -7,5 +7,4 @@
     tools:context="dev.panel.MainActivity">
 
     <include layout="@layout/panel"/>
-
 </RelativeLayout>

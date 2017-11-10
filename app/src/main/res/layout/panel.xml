@@ -1,66 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="300dp"
     android:layout_alignParentBottom="true"
+    android:orientation="vertical"
     android:background="#FFFFFF"
-    android:padding="20dp"
+    android:padding="12dp"
     tools:showIn="@layout/activity_main">
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/button_case"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:weightSum="5"-->
-        <!--android:paddingBottom="15dp">-->
+    <fragment
+        android:id="@+id/buttons_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="dev.panel.fragments.ButtonCaseFragment"
+        tools:layout="@layout/fragment_buttoncase"/>
 
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
+    <fragment
+        android:id="@+id/seekbars_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="dev.panel.fragments.SeekBarFragment"
+        tools:layout="@layout/fragment_seekbars"/>
 
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-
-    <!--</LinearLayout>-->
-
-    <!--<SeekBar-->
-        <!--android:id="@+id/brightness_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/button_case"/>-->
-
-    <!--<SeekBar-->
-        <!--android:id="@+id/system_volume_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/brightness_bar"-->
-        <!--android:layout_marginTop="24dp"/>-->
-
-    <!--<SeekBar-->
-        <!--android:id="@+id/media_volume_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/system_volume_bar"-->
-        <!--android:layout_marginTop="24dp"/>-->
-
-</RelativeLayout>
+</LinearLayout>
