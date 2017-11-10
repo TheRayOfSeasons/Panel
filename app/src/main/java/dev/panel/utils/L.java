@@ -6,6 +6,6 @@ public class L
 {
     public static void m(String tag, Object message)
     {
-        Log.d(tag, String.valueOf(message));
+        Log.w(tag, String.valueOf(message));
     }
 }
