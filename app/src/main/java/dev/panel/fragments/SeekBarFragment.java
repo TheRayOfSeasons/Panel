@@ -33,7 +33,7 @@ public class SeekBarFragment extends Fragment implements SeekBar.OnSeekBarChange
 
         View view = inflater.inflate(R.layout.fragment_seekbars, container, false);
 
-        //Update when brightness is changed by other apps
+        //TODO: Update when brightness is changed by other apps
         SeekBar brightnessBar =  (SeekBar) view.findViewById(R.id.brightness_bar);
         brightnessBar.setMax(255);
         brightnessBar.setProgress(getScreenBrightness());
