@@ -1,54 +1,20 @@
 package dev.panel;
 
 import android.content.ContentResolver;
-import android.provider.Settings;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity
+import dev.panel.utils.L;
+
+public class MainActivity extends AppCompatActivity implements
+        SeekBar.OnSeekBarChangeListener
 {
-
-  /*
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-    CHANGES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    */
-
     private int brightness;
-    private ContentResolver contentResolver;
     private Window window;
 
     @Override
@@ -57,91 +23,64 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        contentResolver = getContentResolver();
+        ContentResolver contentResolver = getContentResolver();
         window = getWindow();
 
         try
         {
             brightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS);
-        } catch (Settings.SettingNotFoundException e)
+        }
+        catch (Settings.SettingNotFoundException e)
         {
             e.printStackTrace();
         }
 
-        final SeekBar brightnessBar = (SeekBar) findViewById(R.id.brightness_bar);
+        SeekBar brightnessBar = (SeekBar) findViewById(R.id.brightness_bar);
         brightnessBar.setMax(100);
 //        brightnessBar.setProgress(brightness);
-        brightnessBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-            {
-                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-                layoutParams.screenBrightness = i;
-                getWindow().setAttributes(layoutParams);
-                Log.wtf("Tag", "WTF");
-//                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, i);
-            }
+        brightnessBar.setOnSeekBarChangeListener(this);
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
-
-            }
-        });
-
-        final SeekBar systemVolumeBar = (SeekBar) findViewById(R.id.system_volume_bar);
+        SeekBar systemVolumeBar = (SeekBar) findViewById(R.id.system_volume_bar);
         systemVolumeBar.setMax(100);
-        systemVolumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-            {
-                Log.d("System Volume", String.valueOf("System Volume: " + i));
-            }
+        systemVolumeBar.setOnSeekBarChangeListener(this);
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
-
-            }
-        });
-
-        final SeekBar mediaVolumeBar = (SeekBar) findViewById(R.id.media_volume_bar);
+        SeekBar mediaVolumeBar = (SeekBar) findViewById(R.id.media_volume_bar);
         mediaVolumeBar.setMax(100);
-        mediaVolumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        mediaVolumeBar.setOnSeekBarChangeListener(this);
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+    {
+        switch (seekBar.getId())
         {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-            {
-                Log.d("Media Volume", String.valueOf("Media Volume: " + i));
-            }
+            case R.id.brightness_bar:
+                L.m("b", i);
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
+                WindowManager.LayoutParams layoutParams = window.getAttributes();
+                layoutParams.screenBrightness = i;
+                window.setAttributes(layoutParams);
+//                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, i);
+                break;
 
-            }
+            case R.id.system_volume_bar:
+                L.m("sv", i);
+                break;
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
+            case R.id.media_volume_bar:
+                L.m("mv", i);
+                break;
+        }
+    }
 
-            }
-        });
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar)
+    {
+    }
 
-        Log.d ("Brightness", String.valueOf(brightness));
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar)
+    {
+
     }
 }
