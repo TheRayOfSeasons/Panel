@@ -1,5 +1,7 @@
 package dev.panel.fragments;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,12 @@ import dev.panel.utils.L;
 public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 {
     public ButtonCaseFragment() {}
+
+//    private WifiManager wifiManager = (WifiManager) this.getActivity()
+//                                                        .getApplicationContext()
+//                                                        .getSystemService(Context.WIFI_SERVICE);
+//
+//    private boolean wifiToggle = wifiManager.isWifiEnabled();
 
     @Nullable
     @Override
@@ -45,6 +53,7 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
+
         switch (view.getId())
         {
             case R.id.toggle_flashlight:
@@ -56,6 +65,7 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.toggle_wifi:
+//                if (!wifiToggle)
                 L.m("toggle", "wifi");
                 break;
 
