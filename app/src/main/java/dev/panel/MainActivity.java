@@ -12,6 +12,27 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity
 {
+    /*
+
+
+
+
+
+
+
+
+
+            PA THE BEST
+
+
+
+
+
+
+
+
+    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
