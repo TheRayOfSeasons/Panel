@@ -1,5 +1,6 @@
 package dev.panel;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,6 +56,14 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
             }
+
+            String[] permissions = new String[]
+            {
+                Manifest.permission.SYSTEM_ALERT_WINDOW,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.CHANGE_WIFI_STATE,
+            };
+            ActivityCompat.requestPermissions(this, permissions, 1001);
         }
     }
 

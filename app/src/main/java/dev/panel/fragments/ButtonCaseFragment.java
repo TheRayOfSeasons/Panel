@@ -18,11 +18,6 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 {
     public ButtonCaseFragment() {}
 
-//    private WifiManager wifiManager = (WifiManager) this.getActivity()
-//                                                        .getApplicationContext()
-//                                                        .getSystemService(Context.WIFI_SERVICE);
-//
-//    private boolean wifiToggle = wifiManager.isWifiEnabled();
 
     @Nullable
     @Override
@@ -33,6 +28,12 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
             @Nullable Bundle savedInstanceState
         )
     {
+//        WifiManager wifiManager = (WifiManager) getActivity()
+//                .getApplicationContext()
+//                .getSystemService(Context.WIFI_SERVICE);
+//
+//        boolean wifiToggle = wifiManager.isWifiEnabled();
+
         View view = inflater.inflate(R.layout.fragment_buttoncase, container, false);
 
         //TODO: Change button ID and object names
