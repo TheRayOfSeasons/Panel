@@ -21,8 +21,6 @@ import dev.panel.service.PanelService;
 
 public class MainActivity extends AppCompatActivity
 {
-    private PanelService service;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,23 +64,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private ServiceConnection serviceConnection = new ServiceConnection()
-    {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder)
-        {
-            PanelService.ServiceBinder binder = (PanelService.ServiceBinder) iBinder;
-            service = binder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {}
-    };
+//    private ServiceConnection serviceConnection = new ServiceConnection()
+//    {
+//        @Override
+//        public void onServiceConnected(ComponentName componentName, IBinder iBinder)
+//        {
+//            PanelService.ServiceBinder binder = (PanelService.ServiceBinder) iBinder;
+//            service = binder.getService();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName componentName) {}
+//    };
 
     public void startService(View view)
     {
         Intent intent = new Intent(this, PanelService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+//        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
         startService(intent);
     }
 }
