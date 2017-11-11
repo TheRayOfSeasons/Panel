@@ -20,6 +20,7 @@ import dev.panel.utils.L;
     {
         private ContentResolver contentResolver;
         private AudioManager systemAudio = null;
+        private AudioManager mediaAudio = null;
 
         public SeekBarFragment() {}
 
@@ -34,6 +35,7 @@ import dev.panel.utils.L;
         {
             contentResolver = getContext().getContentResolver();
             systemAudio = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            mediaAudio = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
             View view = inflater.inflate(R.layout.fragment_seekbars, container, false);
 
@@ -49,7 +51,8 @@ import dev.panel.utils.L;
             systemVolumeBar.setOnSeekBarChangeListener(this);
 
             SeekBar mediaVolumeBar = (SeekBar) view.findViewById(R.id.media_volume_bar);
-            mediaVolumeBar.setMax(100);
+            mediaVolumeBar.setMax(mediaAudio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            mediaVolumeBar.setProgress(mediaAudio.getStreamVolume(AudioManager.STREAM_MUSIC));
             mediaVolumeBar.setOnSeekBarChangeListener(this);
 
             return view;
@@ -77,7 +80,7 @@ import dev.panel.utils.L;
                     break;
 
                 case R.id.media_volume_bar:
-                    //TODO Make Functional
+                    mediaAudio.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
                     L.m("mv", i);
                     break;
             }
