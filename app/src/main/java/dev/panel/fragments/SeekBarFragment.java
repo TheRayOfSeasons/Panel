@@ -33,6 +33,7 @@ import dev.panel.utils.L;
             )
         {
             contentResolver = getContext().getContentResolver();
+            systemAudio = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
             View view = inflater.inflate(R.layout.fragment_seekbars, container, false);
 
@@ -63,18 +64,16 @@ import dev.panel.utils.L;
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b)
         {
-            systemAudio = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
             switch (seekBar.getId())
             {
                 case R.id.brightness_bar:
                     L.m("b", i);
-
                     Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, i);
                     break;
 
                 case R.id.system_volume_bar:
-                    systemAudio.setStreamVolume(AudioManager.STREAM_SYSTEM, i, 0);
                     L.m("sv", i);
+                    systemAudio.setStreamVolume(AudioManager.STREAM_SYSTEM, i, 0);
                     break;
 
                 case R.id.media_volume_bar:
