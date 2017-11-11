@@ -12,27 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity
 {
-    /*
-
-
-
-
-
-
-
-
-
-            Noob
-
-
-
-
-
-
-
-
-    */
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,7 +37,8 @@ public class MainActivity extends AppCompatActivity
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i)
                             {
-                                Intent writeSettings = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                                Intent writeSettings = new Intent
+                                        (Settings.ACTION_MANAGE_WRITE_SETTINGS);
                                 writeSettings.setData(Uri.parse("package:" + getPackageName()));
                                 startActivity(writeSettings);
                             }
