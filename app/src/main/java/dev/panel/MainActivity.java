@@ -1,17 +1,26 @@
 package dev.panel;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import dev.panel.service.PanelService;
 
 public class MainActivity extends AppCompatActivity
 {
+    private PanelService service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,5 +54,25 @@ public class MainActivity extends AppCompatActivity
                         });
             }
         }
+    }
+
+    private ServiceConnection serviceConnection = new ServiceConnection()
+    {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder)
+        {
+            PanelService.ServiceBinder binder = (PanelService.ServiceBinder) iBinder;
+            service = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {}
+    };
+
+    public void startService(View view)
+    {
+        Intent intent = new Intent(this, PanelService.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+        startService(intent);
     }
 }
