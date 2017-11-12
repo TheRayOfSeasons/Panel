@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import dev.panel.utils.L;
 
@@ -71,16 +70,7 @@ public class PanelService extends Service
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(PanelService.this, "Clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        button.setOnLongClickListener(new View.OnLongClickListener()
-        {
-            @Override
-            public boolean onLongClick(View view)
-            {
                 stopSelf();
-                return true;
             }
         });
 
