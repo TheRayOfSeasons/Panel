@@ -1,5 +1,6 @@
 package dev.panel.fragments;
 
+import android.bluetooth.BluetoothA2dp;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 {
     public ButtonCaseFragment() {}
 
+    private WifiManager wifiManager;
+    private boolean wifiToggle;
 
     @Nullable
     @Override
@@ -28,11 +31,11 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
             @Nullable Bundle savedInstanceState
         )
     {
-//        WifiManager wifiManager = (WifiManager) getActivity()
-//                .getApplicationContext()
-//                .getSystemService(Context.WIFI_SERVICE);
-//
-//        boolean wifiToggle = wifiManager.isWifiEnabled();
+        wifiManager = (WifiManager) getActivity()
+                .getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+
+        wifiToggle = wifiManager.isWifiEnabled();
 
         View view = inflater.inflate(R.layout.fragment_buttoncase, container, false);
 
@@ -54,7 +57,6 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
-
         switch (view.getId())
         {
             case R.id.toggle_flashlight:
@@ -66,7 +68,8 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.toggle_wifi:
-//                if (!wifiToggle)
+                wifiToggle = !wifiToggle;
+                wifiManager.setWifiEnabled(wifiToggle);
                 L.m("toggle", "wifi");
                 break;
 
