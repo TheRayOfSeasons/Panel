@@ -17,15 +17,15 @@ import dev.panel.utils.L;
 @SuppressWarnings("RedundantCast")
 public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 {
-    public ButtonCaseFragment() {}
-
     private WifiManager wifiManager;
-    private boolean wifiToggle;
+    private boolean wifiIsEnabled;
+
+    public ButtonCaseFragment() {}
 
     @Nullable
     @Override
     public View onCreateView
-        (
+            (
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState
@@ -35,7 +35,7 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
                 .getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
-        wifiToggle = wifiManager.isWifiEnabled();
+        wifiIsEnabled = wifiManager.isWifiEnabled();
 
         View view = inflater.inflate(R.layout.fragment_buttoncase, container, false);
 
@@ -48,7 +48,7 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 
         ImageView[] toggles = new ImageView[]
                 { flashlight, volumeModes, wifi, bluetooth, rotation };
-        for (ImageView toggle: toggles)
+        for (ImageView toggle : toggles)
             toggle.setOnClickListener(this);
 
         return view;
@@ -68,9 +68,9 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.toggle_wifi:
-                wifiToggle = !wifiToggle;
-                wifiManager.setWifiEnabled(wifiToggle);
-                L.m("toggle", "wifi");
+                wifiIsEnabled = !wifiIsEnabled;
+                L.m("toggle", wifiIsEnabled? "wifi enabled" : "wifi disabled");
+                wifiManager.setWifiEnabled(wifiIsEnabled);
                 break;
 
             case R.id.toggle_bluetooth:
