@@ -1,7 +1,9 @@
 package dev.panel.fragments;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class TogglesFragment extends Fragment implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.toggle_flashlight:
-                L.m("toggle", "flashlight");
+                toggles.flashlight();
                 break;
 
             case R.id.toggle_volume_modes:
