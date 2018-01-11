@@ -29,7 +29,6 @@ public class TogglesFragment extends Fragment implements View.OnClickListener
         )
     {
         toggles = new Toggles (getContext());
-
         View view = inflater.inflate(R.layout.fragment_toggles, container, false);
 
         //TODO: Change button ID and object names

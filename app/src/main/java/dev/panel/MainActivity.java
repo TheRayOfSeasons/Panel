@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity
     private static final int PERMISSION_WRITE_SETTINGS_REQUEST = 1002;
     private static final int PERMISSION_SYSTEM_ALERT_WINDOW_REQUEST = 1003;
 
+    private static final String SERVICE_PASSWORD = "sys";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     //TODO: Permissions not requesting
     private void checkPermissions()
     {
-        requestManifestPermissions();
+        requestWriteSettingsPermission();
     }
 
     private void requestWriteSettingsPermission()
@@ -54,25 +56,25 @@ public class MainActivity extends AppCompatActivity
                 L.m("permissions", "requesting WRITE_SETTINGS");
 
                 Dialoger.createAlertDialog
-                        (
-                            this,
-                            "Allow Modify Settings",
-                            "Please allow the app to modify system settings.",
-                            "Okay",
-                            new DialogInterface.OnClickListener()
+                    (
+                        this,
+                        "Allow Modify Settings",
+                        "Please allow the app to modify system settings.",
+                        "Okay",
+                        new DialogInterface.OnClickListener()
+                        {
+                            @RequiresApi(api = Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
                             {
-                                @RequiresApi(api = Build.VERSION_CODES.M)
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i)
-                                {
-                                    Intent writeSettings = new Intent
-                                            (Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                                    writeSettings.setData(Uri.parse("package:" + getPackageName()));
-                                    startActivityForResult
-                                            (writeSettings, PERMISSION_WRITE_SETTINGS_REQUEST);
-                                }
+                                Intent writeSettings = new Intent
+                                        (Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                                writeSettings.setData(Uri.parse("package:" + getPackageName()));
+                                startActivityForResult
+                                        (writeSettings, PERMISSION_WRITE_SETTINGS_REQUEST);
                             }
-                        ).show();
+                        }
+                    ).show();
             }
         }
     }
@@ -176,14 +178,14 @@ public class MainActivity extends AppCompatActivity
                                 "the permissions requested.")
                         .setCancelable(false)
                         .setPositiveButton("Okay",
-                                new DialogInterface.OnClickListener()
+                            new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i)
                                 {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i)
-                                    {
-                                        requestManifestPermissions();
-                                    }
-                                })
+                                    requestManifestPermissions();
+                                }
+                            })
                         .show();
                 }
             }
@@ -210,24 +212,25 @@ public class MainActivity extends AppCompatActivity
         password.setTransformationMethod(new PasswordTransformationMethod());
 
         final AlertDialog dialog = Dialoger.createAlertDialog
-                (
-                    this,
-                    "(FOR DEV ONLY) Please Enter Password",
-                    "",
-                    "Confirm",
-                    new DialogInterface.OnClickListener()
-                    {
-                        @Override public void onClick(DialogInterface dialogInterface, int i) {}
-                    }
-                );
+            (
+                this,
+                "(FOR DEV ONLY) Please Enter Password",
+                "",
+                "Confirm",
+                new DialogInterface.OnClickListener()
+                {
+                    @Override public void onClick(DialogInterface dialogInterface, int i) {}
+                }
+            );
 
+        dialog.setView(password);
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if(password.getText().toString().equals("sysalert"))
+                if(password.getText().toString().equals(SERVICE_PASSWORD))
                 {
                     dialog.dismiss();
                     Intent intent = new Intent(MainActivity.this, PanelService.class);
