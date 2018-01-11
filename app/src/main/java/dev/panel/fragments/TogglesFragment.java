@@ -14,12 +14,12 @@ import dev.panel.R;
 import dev.panel.utils.L;
 
 @SuppressWarnings("RedundantCast")
-public class ButtonCaseFragment extends Fragment implements View.OnClickListener
+public class TogglesFragment extends Fragment implements View.OnClickListener
 {
     private WifiManager wifiManager;
     private boolean wifiIsEnabled;
 
-    public ButtonCaseFragment() {}
+    public TogglesFragment() {}
 
     @Nullable
     @Override
@@ -36,7 +36,7 @@ public class ButtonCaseFragment extends Fragment implements View.OnClickListener
 
         wifiIsEnabled = wifiManager.isWifiEnabled();
 
-        View view = inflater.inflate(R.layout.fragment_buttoncase, container, false);
+        View view = inflater.inflate(R.layout.fragment_toggles, container, false);
 
         //TODO: Change button ID and object names
         ImageView flashlight = (ImageView) view.findViewById(R.id.toggle_flashlight);
